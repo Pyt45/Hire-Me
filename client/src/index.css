@@ -138,15 +138,18 @@ body {
 }
 
 .signup-btn {
-  margin-top: 50px;
+  margin: 50px 500px;
   padding: 10px 30px;
   border-radius: 10px;
   outline: none;
   border: none;
   background-color: #545C68;
   color: white;
-  margin-right: 50px;
   cursor: pointer;
+  display: flex;
+}
+span {
+  margin-right: 5px;
 }
 
 .account-btn {

@@ -25,9 +25,10 @@ const Navbar = ({ logout, auth: { isLogged, loading, user } }) => {
                 {isLogged ? <Link className="link--btn" to='/profile'>Profile</Link> : null}
             </ul>
             <ul>
-                {!isLogged ? <Link className="link--btn" to='/login'>Sign in</Link> : null}
-                {!isLogged ? <Link className="link--btn" to='/register'>Sign up</Link>
+                {!isLogged ? <Link className="link--btn" to='/login'>Login</Link>
                 : <Link onClick={clearToken} className="navbar--btn" to='/login'>logout</Link>}
+                {/* {!isLogged ? <Link className="link--btn" to='/register'>Sign up</Link> */}
+                {/* : <Link onClick={clearToken} className="navbar--btn" to='/login'>logout</Link>} */}
             </ul>
         </nav>
     )

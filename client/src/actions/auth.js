@@ -19,7 +19,7 @@ export const getLoggedProfile = () => async dispatch => {
     try {
         if (Cookies.get('token'))
             setTokenHeader(Cookies.get('token'));
-        const res = await axios.get('http://localhost:4000/api/users/me');
+        const res = await axios.get('http://localhost:9000/api/users/me');
         console.log('LoggedIn: ', res.data);
         dispatch({
             type: AUTH_PROFILE,
@@ -42,7 +42,7 @@ export const register = ({ username, email, password }) => async dispatch => {
     };
 
     try {
-        const res = await axios.post('http://localhost:4000/api/users/register', {
+        const res = await axios.post('http://localhost:9000/api/users/register', {
             username,
             email,
             password,
@@ -62,30 +62,44 @@ export const register = ({ username, email, password }) => async dispatch => {
 
 // Login User
 
-export const login = ({ email, password }) => async dispatch => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
+export const login = () => async dispatch => {
+    // const config = {
+    //     headers: {
+    //         'Accept': 'application/json', 
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': '*',
+    //     }
+    // };
 
-    try {
-        const res = await axios.post('http://localhost:4000/api/users/login', {
-            email,
-            password
-        }, config);
-
-        dispatch({
-            type: LOGIN_SUCCESS,
-            payload: res.data
-        });
-        dispatch(getLoggedProfile());
-    }catch(err) {
-        console.log(err.response.data.error);
-        dispatch({
-            type: LOGIN_FAIL
+    // try {
+        // const res = await axios.get('http://localhost:9000/auth/github', config);
+        await fetch ('http://localhost:9000/auth/github', {
+            method: 'GET',
+            mode: 'no-cors',
+        }).then(res => res.json()).then(data => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: data
+            });
+            dispatch(getLoggedProfile());
+        }).catch(err => {
+            console.log(err);
+            dispatch({
+                type: LOGIN_FAIL
+            })
         })
-    }
+        // const data = await res.text();
+        // const json = data === "" ? {} : JSON.parse(data);
+        // console.log(json);
+        // console.log(res.data);
+
+        // dispatch({
+        //     type: LOGIN_SUCCESS,
+        //     payload: json
+        // });
+    // }catch(err) {
+    //     console.log(err.response.data.error);
+    // }
 }
 
 // Logout User
