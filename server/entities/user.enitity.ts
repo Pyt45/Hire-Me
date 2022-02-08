@@ -28,14 +28,20 @@ export class User extends BaseEntity {
     @Column({ unique: true, nullable: true })
     username: string;
 
-    @Column()
+    @Column({ nullable: true })
     email: string;
-    
-    @Column()
-    password: string;
 
-    @Column({ default: false })
-    isTwoFaEnabled: boolean;
+    @Column({ nullable: true })
+    profileUrl: string;
+    
+    @Column({ default: 0 })
+    followers: number;
+
+    @Column({ default: 0 })
+    following: number;
+
+    @Column({ default: 0 })
+    public_repos: number;
 
     @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
     role: UserRole;

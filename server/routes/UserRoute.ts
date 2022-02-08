@@ -36,23 +36,23 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 UserRouter.get('/', userController.getUsers);
 UserRouter.get('/me', JwtGuard, userController.getLoggedUser);
 UserRouter.get('/:id', userController.getUserById);
-UserRouter.post('/register', userController.register);
-UserRouter.post('/login', userController.login);
+// UserRouter.post('/register', userController.register);
+// UserRouter.post('/login', userController.login);
 UserRouter.put('/update', JwtGuard, userController.updateProfile);
 UserRouter.put('/avatar', JwtGuard, upload.single('avatar'), userController.uploadAvatar);
 // UserRouter.put('/enable-twofa', JwtGuard, userController.enableTwoFa);
 // UserRouter.put('/disable-twofa', JwtGuard, userController.disableTwoFa);
 
 // user friend request
-UserRouter.post('/send-friend-request/:recipientId', JwtGuard, userController.sendFriendRequest);
-UserRouter.patch('/accept-friend-request/:applicantId', JwtGuard, userController.acceptFriendRequest);
-UserRouter.post('/block-user/:recipientId', JwtGuard, userController.blockUser);
-UserRouter.post('/unblock-user/:recipientId', JwtGuard, userController.unblockUser);
+// UserRouter.post('/send-friend-request/:recipientId', JwtGuard, userController.sendFriendRequest);
+// UserRouter.patch('/accept-friend-request/:applicantId', JwtGuard, userController.acceptFriendRequest);
+// UserRouter.post('/block-user/:recipientId', JwtGuard, userController.blockUser);
+// UserRouter.post('/unblock-user/:recipientId', JwtGuard, userController.unblockUser);
 
 // list user relation
-UserRouter.get('/friend/list', JwtGuard, userController.getFriends);
-UserRouter.get('/friend/pending-request', JwtGuard, userController.getPendingRequest);
-UserRouter.get('/friend/no-relation', JwtGuard, userController.getNoRelationUsers);
-UserRouter.get('/friend/blocked-user', JwtGuard, userController.getBlockedUser);
+// UserRouter.get('/friend/list', JwtGuard, userController.getFriends);
+// UserRouter.get('/friend/pending-request', JwtGuard, userController.getPendingRequest);
+// UserRouter.get('/friend/no-relation', JwtGuard, userController.getNoRelationUsers);
+// UserRouter.get('/friend/blocked-user', JwtGuard, userController.getBlockedUser);
 
 export { UserRouter as userRouter };
